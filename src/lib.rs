@@ -13,7 +13,7 @@ use bdk::keys::bip39::{Language, Mnemonic, WordCount};
 use bdk::keys::{DerivableKey, ExtendedKey, GeneratableKey, GeneratedKey};
 use bdk::miniscript::BareCtx;
 use bdk::wallet::AddressIndex;
-use bdk::{BlockTime, Error, FeeRate, SignOptions, Wallet as BdkWallet};
+use bdk::{BlockTime, Error, FeeRate, LocalUtxo,SignOptions, Wallet as BdkWallet};
 use std::convert::TryFrom;
 use std::str::FromStr;
 use std::sync::{Arc, Mutex, MutexGuard};
