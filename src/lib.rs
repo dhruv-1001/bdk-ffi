@@ -235,6 +235,11 @@ impl Wallet {
         let txid = self.get_wallet().broadcast(&tx)?;
         Ok(txid.to_hex())
     }
+    
+    fn list_unspent(&self) -> Result<Vec<LocalUtxo>, Error> {
+        let unspent_utxo = self.get_wallet().list_unspent()?;
+        Ok(unspent_utxo)
+    }
 }
 
 pub struct ExtendedKeyInfo {

@@ -116,6 +116,27 @@ callback interface BdkProgress {
   void update(f32 progress, string? message);
 };
 
+dictionary OutPoint {
+  string txid;
+  u32 vout;
+};
+
+dictionary TxOut {
+  u64 value;
+  string address;
+};
+
+enum KeychainKind {
+  "External",
+  "Internal",
+};
+
+dictionary LocalUtxo {
+  OutPoint outpoint;
+  TxOut txout;
+  KeychainKind keychain;
+};
+
 interface Wallet {
   [Throws=BdkError]
   constructor(string descriptor, string? change_descriptor, Network network, DatabaseConfig database_config, BlockchainConfig blockchain_config);
@@ -132,6 +153,8 @@ interface Wallet {
   void sync(BdkProgress progress_update, u32? max_address_param);
   [Throws=BdkError]
   string broadcast([ByRef] PartiallySignedBitcoinTransaction psbt);
+  [Throws=BdkError]
+  sequence<LocalUtxo> list_unspent();
 };
 
 interface PartiallySignedBitcoinTransaction {
